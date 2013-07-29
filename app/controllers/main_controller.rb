@@ -2,18 +2,79 @@ class MainController < ApplicationController
 
 	def index
 		@shelf = Shelf.all
+		#if @shelf == nil
+			populateshelf()
+		#end
 
 	end
 
 	def show
-		@book = Books.find_by_month(params[show_month()])
+		@book = Books.find_by_month(params[showmonth()])
 	end
 
 	def showmonth
-		#@month = Shelf.month(Time.month + " " + Time.year)
-		@month = (Time.month + " " + Time.year).to_s 
+		if helf.month(Time.month + " " + Time.year) == nil
+			
+				@month = defaultmonth()
+			
+		else
+
+		end
+		
 		Rails.logger.debug "the current date is:#{@month}"
 		return @month
 	end
 
+	def save
+
+
+	end
+	def currentmonth
+		@month = (Time.now.month + " " + Time.now.year).to_s
+		Rails.logger.debug "the current date is:#{@month}"
+		return @month
+	end
+
+	
+
+	def populateshelf
+		yearnow = Time.now.year.to_s
+		Rails.logger.debug "curent year:#{yearnow}"
+		@newshelf = Shelf.new(:month => "January #{yearnow}")
+		@newshelf = Shelf.new(:month => "Febuary #{yearnow}")
+		@newshelf = Shelf.new(:month => "March #{yearnow}")
+		@newshelf = Shelf.new(:month => "April #{yearnow}")
+		@newshelf = Shelf.new(:month => "May #{yearnow}")
+		@newshelf = Shelf.new(:month => "June #{yearnow}")
+		@newshelf = Shelf.new(:month => "July #{yearnow}")
+		@newshelf = Shelf.new(:month => "August #{yearnow}")
+		@newshelf = Shelf.new(:month => "September #{yearnow}")
+		@newshelf = Shelf.new(:month => "October #{yearnow}")
+		@newshelf = Shelf.new(:month => "November #{yearnow}")
+		@newshelf = Shelf.new(:month => "December #{yearnow}")
+
+		Rails.logger.debug @newshelf
+		@newshelf.each do |cubook|
+			defualtbook(cubook)
+		end
+		@newshelf.save
+	end
+
+	def defaultbook(currentbook)
+		entry = Shelf.find_by_month(:month => currentbook.month)
+		for i in 0..30
+			@entries = entry.book.new
+			@entries.day = ""
+			@entries.item = ""
+			@entries.ref = ""
+			@entries.in = ""
+			@entries.out = ""
+
+			Rails.logger.debug @entry[i]
+
+		end
+		currentbook = @entries
+	end
+
+	
 end

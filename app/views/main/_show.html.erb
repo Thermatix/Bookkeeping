@@ -21,22 +21,25 @@
 				<td></td>
 				<td></td>
 		</tr>
-	
-		<% i = 0 
-		while i < 50 %>
-			<%if i.odd? %>
-				<tr class = "alt" >
-			<%else %>
-				<tr>
-			<%end %>
-				     <td>temp</td>
-				     <td>temp</td>
-				     <td>temp</td>
-				     <td>temp</td>
-				     <td>temp</td>
-			      
-			      	<% i += 1 %>
-			    </tr>
- 		 <% end %>
+
+		<%= form_for @book do |f| %>
+			<% i = 0 
+			while i < @book.count %>
+				<%if i.odd? %>
+					<tr class = "alt" >
+				<%else %>
+					<tr>
+				<%end %>
+					     <td>f.input :day, :input_html =>{:value => f.day}</td>
+					     <td>f.input :item, :input_html =>{:value => f.day}</td>
+					     <td>f.input :ref, :input_html =>{:value => f.day}</td>
+					     <td>f.input :in, :input_html =>{:value => f.day}</td>
+					     <td>f.input :out, :input_html =>{:value => f.day}</td>
+				      
+				      	<% i += 1 %>
+				    </tr>
+	 		 <% end %>
+	 	<%end%>
+
  	
 </table>
