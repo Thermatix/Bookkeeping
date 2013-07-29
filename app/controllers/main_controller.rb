@@ -1,3 +1,5 @@
+require 'debugger'
+
 class MainController < ApplicationController
 
 	def index
@@ -21,7 +23,7 @@ class MainController < ApplicationController
 
 		end
 		
-		Rails.logger.debug "the current date is:#{@month}"
+		Rails.logger.debug "Debug: the current date is:#{@month}"
 		return @month
 	end
 
@@ -31,30 +33,30 @@ class MainController < ApplicationController
 	end
 	def currentmonth
 		@month = (Time.now.month + " " + Time.now.year).to_s
-		Rails.logger.debug "the current date is:#{@month}"
+		Rails.logger.debug "Debug: the current date is:#{@month}"
 		return @month
 	end
 
-	
+	def new
+		@shelf = Shelf.new
+	end
 
 	def populateshelf
+		
+		
 		yearnow = Time.now.year.to_s
-		Rails.logger.debug "curent year:#{yearnow}"
-		@newshelf = Shelf.new(:month => "January #{yearnow}")
-		@newshelf = Shelf.new(:month => "Febuary #{yearnow}")
-		@newshelf = Shelf.new(:month => "March #{yearnow}")
-		@newshelf = Shelf.new(:month => "April #{yearnow}")
-		@newshelf = Shelf.new(:month => "May #{yearnow}")
-		@newshelf = Shelf.new(:month => "June #{yearnow}")
-		@newshelf = Shelf.new(:month => "July #{yearnow}")
-		@newshelf = Shelf.new(:month => "August #{yearnow}")
-		@newshelf = Shelf.new(:month => "September #{yearnow}")
-		@newshelf = Shelf.new(:month => "October #{yearnow}")
-		@newshelf = Shelf.new(:month => "November #{yearnow}")
-		@newshelf = Shelf.new(:month => "December #{yearnow}")
-
-		Rails.logger.debug @newshelf
-		@newshelf.each do |cubook|
+		Rails.logger.debug "Debug: current year: #{yearnow}"
+		@newshelf = Array.new
+		for i in 0..12
+			@newshelf += Shelf.new(:month => "#{Date::MONTHNAMES[i]} #{yearnow}")
+		end
+		
+		Rails.logger.debug "Debug: Array size: #{@newshelf.size}"
+		 @newshelf.each do |cubook|
+			Rails.logger.debug "Debug: #{cubook.month}"
+		end
+		Rails.logger.debug "Debug: #{@newshelf.month}"
+		for cubook in @newshelf
 			defualtbook(cubook)
 		end
 		@newshelf.save

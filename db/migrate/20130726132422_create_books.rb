@@ -6,7 +6,7 @@ class CreateBooks < ActiveRecord::Migration
       t.string :ref
       t.string :in
       t.string :out
-      t.references :shelf, index: true
+      t.references :shelf, month: true
 
       t.timestamps
     end
