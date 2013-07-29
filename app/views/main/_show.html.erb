@@ -1,0 +1,42 @@
+<table class = "book" >
+	
+	
+		
+		<tr>
+			
+			
+			<th style=left:0px;top:0px>Day</th>
+
+			<th style=left:179px;top:0px;>Item</th>
+			<th style=left:361px;top:0px;>Ref</th> 
+			<th style=left:543px;top:0px;>In</th> 
+			<th style=left:725px;top:0px;>Out</th>
+			
+
+		</tr>
+		<tr class = "blank">
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+		</tr>
+	
+		<% i = 0 
+		while i < 50 %>
+			<%if i.odd? %>
+				<tr class = "alt" >
+			<%else %>
+				<tr>
+			<%end %>
+				     <td>temp</td>
+				     <td>temp</td>
+				     <td>temp</td>
+				     <td>temp</td>
+				     <td>temp</td>
+			      
+			      	<% i += 1 %>
+			    </tr>
+ 		 <% end %>
+ 	
+</table>

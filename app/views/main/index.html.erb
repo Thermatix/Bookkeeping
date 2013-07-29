@@ -1,0 +1,40 @@
+<table class = "gui" >
+	<tr>
+		<td class = "guitop" colspan = 5 >
+						
+						<%=render "guitop"%>
+				
+		</td>
+	</tr>
+	<tr>
+		<td  class = "guiside">
+		</td>
+		<td class = "centre" colspan = 3>
+			<div class = "overflow">
+				<%= render "show" %>
+			</div>
+		</td>
+			<td  class = "guiside">
+		</td>
+	</tr>
+	<tr>
+		<td  class = "guibottomcorner">
+		</td>
+		<td class = "guibottomside">
+		<div class ="bigbutton"> 
+			Previous Month
+		</div>	
+		</td>
+		<td class = "guibottom"> 
+			
+				<%= render "showmonth" %>
+			
+		</td>
+		<td class = "guibottomside" align = "right">
+		<div class ="bigbutton"> 
+			Next Month
+		</div>
+		</td>
+		<td class = "guibottomcorner">
+	</tr>
+</table>

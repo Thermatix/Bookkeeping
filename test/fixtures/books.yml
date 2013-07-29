@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  day: MyString
+  item: MyString
+  ref: MyString
+  in: MyString
+  out: MyString
+  shelf_id: 
+
+two:
+  day: MyString
+  item: MyString
+  ref: MyString
+  in: MyString
+  out: MyString
+  shelf_id: 
