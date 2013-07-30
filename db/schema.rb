@@ -11,28 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130726132422) do
+ActiveRecord::Schema.define(version: 20130730095402) do
 
-  create_table "books", force: true do |t|
-    t.string   "day"
-    t.string   "item"
-    t.string   "ref"
-    t.string   "in"
-    t.string   "out"
-    t.integer  "shelf_id"
+  create_table "items", force: true do |t|
+    t.datetime "transaction_date"
+    t.string   "name"
+    t.string   "reference"
+    t.string   "in_amount"
+    t.string   "out_amount"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
-  add_index "books", ["shelf_id"], name: "index_books_on_shelf_id"
-
-  create_table "shelves", force: true do |t|
-    t.string   "month"
-    t.integer  "books_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "shelves", ["books_id"], name: "index_shelves_on_books_id"
 
 end

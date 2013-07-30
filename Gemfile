@@ -30,6 +30,8 @@ gem 'jbuilder', '~> 1.2'
 #for debugging
 gem 'debugger'
 
+gem 'awesome_print'
+
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false

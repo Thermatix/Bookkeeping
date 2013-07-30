@@ -3,80 +3,59 @@ require 'debugger'
 class MainController < ApplicationController
 
 	def index
-		@shelf = Shelf.all
-		#if @shelf == nil
-			populateshelf()
-		#end
-
+		@items = Item.where("transaction_date > ? AND  transaction_date < ?",lower_date,upper_date)
+		load_next_month
+		load_previous_month
+		@month = "#{ Date::MONTHNAMES[@items.first.transaction_date.month]} #{@items.first.transaction_date.year}"
+		Rails.logger.debug "Debug current month: #{@month}"
 	end
 
 	def show
-		@book = Books.find_by_month(params[showmonth()])
-	end
 
-	def showmonth
-		if helf.month(Time.month + " " + Time.year) == nil
-			
-				@month = defaultmonth()
-			
-		else
-
-		end
-		
-		Rails.logger.debug "Debug: the current date is:#{@month}"
-		return @month
 	end
 
 	def save
-
-
-	end
-	def currentmonth
-		@month = (Time.now.month + " " + Time.now.year).to_s
-		Rails.logger.debug "Debug: the current date is:#{@month}"
-		return @month
 	end
 
 	def new
-		@shelf = Shelf.new
+
 	end
 
-	def populateshelf
-		
-		
-		yearnow = Time.now.year.to_s
-		Rails.logger.debug "Debug: current year: #{yearnow}"
-		@newshelf = Array.new
-		for i in 0..12
-			@newshelf += Shelf.new(:month => "#{Date::MONTHNAMES[i]} #{yearnow}")
-		end
-		
-		Rails.logger.debug "Debug: Array size: #{@newshelf.size}"
-		 @newshelf.each do |cubook|
-			Rails.logger.debug "Debug: #{cubook.month}"
-		end
-		Rails.logger.debug "Debug: #{@newshelf.month}"
-		for cubook in @newshelf
-			defualtbook(cubook)
-		end
-		@newshelf.save
+	private
+
+	def lower_date
+		Date.civil year,month,1
 	end
 
-	def defaultbook(currentbook)
-		entry = Shelf.find_by_month(:month => currentbook.month)
-		for i in 0..30
-			@entries = entry.book.new
-			@entries.day = ""
-			@entries.item = ""
-			@entries.ref = ""
-			@entries.in = ""
-			@entries.out = ""
-
-			Rails.logger.debug @entry[i]
-
-		end
-		currentbook = @entries
+	def upper_date
+		Date.civil year,month,-1
 	end
 
-	
+	def month
+		(params[:month] || DateTime.now.month).to_i
+	end
+
+	def year
+		(params[:year] || DateTime.now.year).to_i
+	end
+
+	def load_next_month
+		@next_month = month + 1
+		@next_year = year
+		if @next_month > 12
+			@next_year += 1
+			@next_month = 1
+		end
+	end
+
+	def load_previous_month
+		@previous_month = month - 1
+		@prevous_year = year
+
+		if @previous_month < 1
+			@previous_year -= 1
+			@previous_month = 12
+		end
+	end
+
 end

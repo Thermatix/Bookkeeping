@@ -1,0 +1,12 @@
+
+	<% for @item in @items %>
+		<tr>
+			<%= form_for @item do |f| %>
+				<td><%= f.text_field :transaction_date, value:  Date::DAYNAMES[@item.transaction_date.day%7].to_s %></td>
+				<td><%= f.text_field :name %></td>
+				<td><%= f.text_field :reference %></td>
+				<td><%= f.text_field :in_amount %></td>
+				<td><%= f.text_field :out_amount %></td>
+			<%end%>
+		</tr>
+	<% end %>

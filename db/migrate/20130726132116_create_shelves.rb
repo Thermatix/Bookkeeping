@@ -1,7 +1,7 @@
 class CreateShelves < ActiveRecord::Migration
   def change
     create_table :shelves do |t|
-      t.string :month
+      t.datetime :month
       
 
       t.timestamps
